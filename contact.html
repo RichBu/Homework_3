@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="eng-us">
+
+
+<!-- contact.html of Bootstrap-Portfolio folder  -->
+
+<!-- by Rich Budek  01/26/2018          -->
+<!-- for NU Bootcamp.  Homework #2      -->
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rich Budek's Contact Web Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- load my style sheet -->
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <!-- load FontAwesome -->
+    <script src="https://use.fontawesome.com/f41d7d3328.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default" id="navBarCommon">
+        <!--  NavBar is loaded in JS based on id="navBarCommon" -->
+        <!--  this makes the NavBar be the same across all the web pages -->
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- main wrapper is row of two columns -->
+            <div class="col-lg-9 col-sm-12 col-xs-12">
+                <!-- left hand colmn is two rows -->
+                <div class="row">
+                    <div class="page-header">
+                        <h1>Contact</h1>
+                    </div>
+                </div>
+                <!-- after the about me header, there is a row with 1 columns -->
+                <div class="row">
+                    <!-- wrap the left side with "contact" tag for SEO engines -->
+                    <!-- *RPB lookup what tag for contact form -->
+                    <artcile>
+                        <!-- article is one colunns always -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xm-12">
+                            <!-- *RPB  put in contact form items here  -->
+                            <!-- Text input-->
+                            <!-- NAME  input field -->
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="ccontrol-label">Name</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-user"></i>
+                                            </span>
+                                            <input name="Name" placeholder="John Smith" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- EMAIL input field -->
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="ccontrol-label">Email</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-envelope"></i>
+                                            </span>
+                                            <input name="Email" placeholder="example@gmail.com" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  MESSAGE input field -->
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="ccontrol-label">Message</label>
+                                    <div class="col-md-12">
+                                        <textarea class="form-control boxMessageInput" rows="3" placeholder=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding: 5px;">
+                                    <p><h1> </h1> <br></p>
+                            </div>
+
+                        </div>
+                    </artcile>
+
+                </div>
+            </div>
+
+            <!-- This is the panel on the right, redundant code -->
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <aside>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Connect with Me</h3>
+                        </div>
+                        <div class="panel-body">
+                            <a class="btn btn-social-icon btn-github gl-3x" style="color:black">
+                                <span class="fa fa-github-square"></span>
+                            </a>
+                            <a class="btn btn-social-icon btn-linked gl-3x">
+                                <span class="fa fa-linkedin-square"></span>
+                            </a>
+                            <a class="btn btn-social-icon btn-stacked gl-1-5x" style="color:white; background-color: orange; height:40px; width:40px">
+                                <span class="fa fa-stack-overflow"></span>
+                            </a>
+                            <br>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- main row -->
+
+    <div class="footer">
+        <span class="label label-default">Copyright &COPY; 2018 Rich Budek</span>
+    </div>
+
+
+    <!--  Load Javascript libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- load my custom js for this project -->
+    <script src="assets/script.js"></script>
+</body>
+
+</html>

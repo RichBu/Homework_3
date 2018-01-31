@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="eng-us">
+
+
+<!--  index.html  of Hangman game -->
+
+<!-- by Rich Budek  01/30/2018        -->
+<!-- for NU Bootcamp.  Hangman    -->
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rich Budek's Hangman Game Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- load my style sheet -->
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <!-- load FontAwesome -->
+    <script src="https://use.fontawesome.com/f41d7d3328.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default" id="navBarCommon">
+        <!--  NavBar is loaded in JS based on id="navBarCommon" -->
+        <!--  this makes the NavBar be the same across all the web pages -->
+    </nav>
+
+    <!-- Modal windows come up next -->
+    <!-- Settings Modal -->
+    <div id="modSettings" class="modal">
+        <div class="modal-content">
+            <span id="closeModSettings" class="close">&times;</span>
+            <p>Settings for the game</p>
+            <p>These are the global settings to be used throughout the game</p>
+        </div>
+    </div>
+    <!-- Help Modal -->
+    <div id="modHelp" class="modal">
+        <div class="modal-content">
+            <span id="closeModHelp" class="close">&times;</span>
+            <p>Hangman Game by Rich Budek</p>
+            <p>for Northwestern University Full Stack Bootcamp</p>
+            <p>This game is meant to run inside of a browser using Javascript</p>
+        </div>
+    </div>
+    <!-- Hi-Scores Modal -->
+    <div id="modHiScores" class="modal">
+        <div class="modal-content">
+            <span id="closeModHiScores" class="close">&times;</span>
+            <p>Hi-Scores for this Game</p>
+            <p>Tt</p>
+        </div>
+    </div>
+    <!-- Play Modal -->
+    <div id="modPlay" class="modal">
+        <div class="modal-content">
+            <span id="closeModPlay" class="close">&times;</span>
+            <p>Play the Game</p>
+            <p>There are several things left to do</p>
+        </div>
+    </div>
+    <!-- Words Modal -->
+    <div id="modWords" class="modal">
+        <div class="modal-content">
+            <span id="closeModWords" class="close">&times;</span>
+            <p>Words used by the game</p>
+            <p>This uses words from several "dictionaries"</p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- This is the top row of buttons -->
+            <button style="Float: right;" id="btnSettings" class="bigButton">SETTINGS </button>
+            <button style="Float: right;" id="btnHelp" class="bigButton">HELP</button>
+            <button style="Float: right;" id="btnHiScores" class="bigButton">HI SCORES</button>
+            <button style="Float: right;" id="btnPlay" class="bigButton">PLAY </button>
+            <button style="Float: right;" id="btnWords" class="bigButton">WORDS </button>
+
+        </div>
+        <div class="row">
+            <!-- main wrapper is row of two columns -->
+            <div class="col-lg-9 col-sm-12 col-xs-12">
+                <!-- left hand colmn is two rows -->
+                <div class="row">
+                    <div class="page-header">
+                        <h1>Hangman Game</h1>
+                    </div>
+                </div>
+                <!-- after the about me header, there is a row with 2 columns -->
+                <div class="row">
+                    <!-- wrap the left side with "article" tag for SEO engines -->
+                    <artcile>
+                        <!-- article is two colunns -->
+                        <div class="col-lg-3 col-md-12 col-sm-3 col-xm-12">
+                            <img src="http://placehold.it/150x150" alt="Placeholder" class="img-thumbnail img-responsive">
+                        </div>
+                        <div class="col-lg-9 col-md-12 col-sm-3 col-xs-12">
+                            <p> PUT
+                            </p>
+                        </div>
+                    </artcile>
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <aside>
+                    <P>this is the side</P>
+                </aside>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- main row -->
+
+    <div class="footer">
+        <span class="label label-default">Copyright &COPY; 2018 Rich Budek</span>
+    </div>
+
+
+    <!--  Load Javascript libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- load my custom js for this project -->
+    <script src="assets/script.js"></script>
+    <script>
+        // prepare the modals
+        var modalHelp = document.getElementById('modHelp');
+        var modalSettings = document.getElementById('modSettings');
+        var modalHiScores = document.getElementById('modHiScores');
+        var modalPlay = document.getElementById('modPlay');
+        var modalWords = document.getElementById('modWords');
+
+        // Get the button that opens the modal
+        var btnHelp = document.getElementById("btnHelp");
+        btnHelp.onclick = function () {
+            modalHelp.style.display = "block";
+        }
+        var btnSettings = document.getElementById("btnSettings");
+        btnSettings.onclick = function () {
+            modalSettings.style.display = "block";
+        }
+        var btnHiScores = document.getElementById("btnHiScores");
+        btnHiScores.onclick = function () {
+            modalHiScores.style.display = "block";
+        }
+        var btnPlay = document.getElementById("btnPlay");
+        btnPlay.onclick = function () {
+            modalPlay.style.display = "block";
+        }
+        var btnWords = document.getElementById("btnWords");
+        btnWords.onclick = function () {
+            modalWords.style.display = "block";
+        }
+
+        // Get the <span> element that closes the modal
+        //var closeModHelp = document.getElementsByClassName("close")[0];
+        var closeModHelp = document.getElementById("closeModHelp");
+        var closeModSettings = document.getElementById("closeModSettings");
+        var closeModHiScores = document.getElementById("closeModHiScores");
+        var closeModPlay = document.getElementById("closeModPlay");
+        var closeModWords = document.getElementById("closeModWords");
+
+        // When the user clicks on <span> (x), close the modal
+        closeModHelp.onclick = function () {
+            modalHelp.style.display = "none";
+        }
+        closeModSettings.onclick = function () {
+            modalSettings.style.display = "none";
+        }
+        closeModHiScores.onclick = function () {
+            modalHiScores.style.display = "none";
+        }
+        closeModPlay.onclick = function () {
+            modalPlay.style.display = "none";
+        }
+        closeModWords.onclick = function () {
+            modalWords.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modalHelp) {
+                modalHelp.style.display = "none";
+            }
+            if (event.target == modalSettings) {
+                modalSettings.style.display = "none";
+            }
+            if (event.target == modalHiScores) {
+                modalHiScores.style.display = "none";
+            }
+            if (event.target == modalPlay) {
+                modalPlay.style.display = "none";
+            }
+            if (event.target == modalWords) {
+                modalWords.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
