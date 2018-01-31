@@ -42,7 +42,9 @@
             <span id="closeModHelp" class="close">&times;</span>
             <p>Hangman Game by Rich Budek</p>
             <p>for Northwestern University Full Stack Bootcamp</p>
-            <p>This game is meant to run inside of a browser using Javascript</p>
+            <p>This game is meant to run inside of a browser using Javascript. The windows is responsive (liquid)
+                will change based on the size of the screen, with buttons moving, etc. as the screen width changes.
+            </p>
         </div>
     </div>
     <!-- Hi-Scores Modal -->
@@ -72,22 +74,30 @@
 
     <div class="container-fluid">
         <div class="row">
-            <!-- This is the top row of buttons -->
-            <button style="Float: right;" id="btnSettings" class="bigButton">SETTINGS </button>
-            <button style="Float: right;" id="btnHelp" class="bigButton">HELP</button>
-            <button style="Float: right;" id="btnHiScores" class="bigButton">HI SCORES</button>
-            <button style="Float: right;" id="btnPlay" class="bigButton">PLAY </button>
-            <button style="Float: right;" id="btnWords" class="bigButton">WORDS </button>
-
+            <!-- top row, make it two columns for smaller screens -->
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                <!-- This is coumn of heading -->
+                <p><h1>Hangman Game</h1></p>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-6 col xs-6">
+                <div class="row">
+                    <p><h2> </h2></p>
+                </div>
+                <div class="row">
+                    <!-- This is the column with buttons -->
+                    <button style="Float: left;" id="btnWords" class="bigButton">WORDS </button>
+                    <button style="Float: left;" id="btnPlay" class="bigButton">PLAY </button>
+                    <button style="Float: left;" id="btnHiScores" class="bigButton">HI SCORES</button>
+                    <button style="Float: left;" id="btnHelp" class="bigButton">HELP</button>
+                    <button style="Float: left;" id="btnSettings" class="bigButton">SETTINGS </button>
+                </div>
+            </div>
         </div>
         <div class="row">
             <!-- main wrapper is row of two columns -->
             <div class="col-lg-9 col-sm-12 col-xs-12">
                 <!-- left hand colmn is two rows -->
                 <div class="row">
-                    <div class="page-header">
-                        <h1>Hangman Game</h1>
-                    </div>
                 </div>
                 <!-- after the about me header, there is a row with 2 columns -->
                 <div class="row">
@@ -129,80 +139,9 @@
 
     <!-- load my custom js for this project -->
     <script src="assets/script.js"></script>
-    <script>
-        // prepare the modals
-        var modalHelp = document.getElementById('modHelp');
-        var modalSettings = document.getElementById('modSettings');
-        var modalHiScores = document.getElementById('modHiScores');
-        var modalPlay = document.getElementById('modPlay');
-        var modalWords = document.getElementById('modWords');
-
-        // Get the button that opens the modal
-        var btnHelp = document.getElementById("btnHelp");
-        btnHelp.onclick = function () {
-            modalHelp.style.display = "block";
-        }
-        var btnSettings = document.getElementById("btnSettings");
-        btnSettings.onclick = function () {
-            modalSettings.style.display = "block";
-        }
-        var btnHiScores = document.getElementById("btnHiScores");
-        btnHiScores.onclick = function () {
-            modalHiScores.style.display = "block";
-        }
-        var btnPlay = document.getElementById("btnPlay");
-        btnPlay.onclick = function () {
-            modalPlay.style.display = "block";
-        }
-        var btnWords = document.getElementById("btnWords");
-        btnWords.onclick = function () {
-            modalWords.style.display = "block";
-        }
-
-        // Get the <span> element that closes the modal
-        //var closeModHelp = document.getElementsByClassName("close")[0];
-        var closeModHelp = document.getElementById("closeModHelp");
-        var closeModSettings = document.getElementById("closeModSettings");
-        var closeModHiScores = document.getElementById("closeModHiScores");
-        var closeModPlay = document.getElementById("closeModPlay");
-        var closeModWords = document.getElementById("closeModWords");
-
-        // When the user clicks on <span> (x), close the modal
-        closeModHelp.onclick = function () {
-            modalHelp.style.display = "none";
-        }
-        closeModSettings.onclick = function () {
-            modalSettings.style.display = "none";
-        }
-        closeModHiScores.onclick = function () {
-            modalHiScores.style.display = "none";
-        }
-        closeModPlay.onclick = function () {
-            modalPlay.style.display = "none";
-        }
-        closeModWords.onclick = function () {
-            modalWords.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modalHelp) {
-                modalHelp.style.display = "none";
-            }
-            if (event.target == modalSettings) {
-                modalSettings.style.display = "none";
-            }
-            if (event.target == modalHiScores) {
-                modalHiScores.style.display = "none";
-            }
-            if (event.target == modalPlay) {
-                modalPlay.style.display = "none";
-            }
-            if (event.target == modalWords) {
-                modalWords.style.display = "none";
-            }
-        }
-    </script>
+    <script src="assets/script_modals.js"></script>
+    <script src="assets/script_words.js"></script>
+    <script src="assets/script_play.js"></script>
 </body>
 
 </html>
