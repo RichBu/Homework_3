@@ -60,6 +60,10 @@ var gameGuess = {
     resultsChr: [], //char array
     resultsDispStr: "",  //result display string
     lettersPicked: [],
+    lettersGoodChr: [],
+    lettersGoodStr: "",
+    lettersBadChr: [],
+    lettersBadStr: "",
     state: 0,
     numGuesses: 0,
     numWrong: 0,
@@ -69,6 +73,10 @@ var gameGuess = {
     timeElapsedDT: "",
     timeElapsedSec: 0,
     timeAllowed: 0,
+    isGameOverMatch: false;     //game is over because a match
+    isGameOverLost: false;      //game is over because ran out of guesses
+    isGameOverTimeOut: false;  //game is over, timed out
+
 
     clearDisp: function () {
         //clear out the disp strings
@@ -77,39 +85,93 @@ var gameGuess = {
         for (i = 0; i < stopVal; i++) {
             this.resultsChr.pop();
         }
-        resultsDispStr = "";
+        this.resultsDispStr = "";
+
+        stopVal = this.lettersBadChr.length;
+        for (i = 0; i < stopVal; i++) {
+            this.lettersBadChr.pop();
+        }
+        this.lettersBadStr = "";
+
+        stopVal = this.lettersGoodChr.length;
+        for (i = 0; i < stopVal; i++) {
+            this.lettersGoodChr.pop();
+        }
+        this.lettersGoodStr = "";
     },
 
     init: function () {
         this.clearDisp();
         //clear letters picked array
         var stopVal = this.lettersPicked.length;
-        for (i = 0; i < stopVal; i++) {
+        for (var i = 0; i < stopVal; i++) {
             this.lettersPicked.pop();
         }
-        this.state = 0;
-        numGuesses = 0;
-        numWrong = 0;
-        numCorrect = 0;
-        numCharRight = 0;
-        timeStart = "";
-        timeElapsedDT = ""
-        timeElapsedSec = 0;
-        timeAllowed: 0;
+        this.state = -1;
+        this.numGuesses = 0;
+        this.numWrong = 0;
+        this.numCorrect = 0;
+        this.numCharRight = 0;
+        this.timeStart = "";
+        this.timeElapsedDT = ""
+        this.timeElapsedSec = 0;
+        this.timeAllowed: 0;
     },
 
-    redrawResultsStr: function ( answerIn ) {
+    compPicksToAnswer: function (answerIn) {
+        //compare the letters picked to the answer and puts into results
+        //loop thru every letter picked, then loop thru answer
+        var stopVal1 = this.lettersPicked.length;
+        var stopVal2 = answerIn.length;
+        for (var i = 0; i < stopVal1; i++) {
+            var noLetterFound = true;
+            for (var j = 0; j < stopVal2; j++) {
+                if (this.lettersPicked[i] === answerIn.charAt(j)) {
+                    //there is a match so index of results is same pos as answerIn
+                    this.resultsChr[j] = answerIn.charAt(j);
+                    this.lettersGoodChr.push(answerIn.charAt(j));
+                    this.lettersGoodStr = this.lettersGoodStr + answerIn.charAt(j);
+                    noLetterFound = false;
+                }
+            }
+            if (noLetterFound === true) {
+                //there was not a match
+                //this.resultsChr.push("_");  //push _ as a default
+                this.lettersBadChr.push(answerIn.charAt(j));
+                this.lettersBadStr = this.lettersBadStr + this.lettersPicked[i]; 
+            }
+        }
+    },
+
+    redrawResultsStr: function (answerIn) {
         //redraw (refill) the results str
         this.clearDisp();
         //from the string coming in, setup the results array and string
         var stopVal = answerIn.length;
-        for ( i=0; i<stopVal; i++ )  {
+        for (i = 0; i < stopVal; i++) {
             this.resultsChr.push("_");  //push _ as a default
         }
         this.numCorrect = 0;
 
+        this.compPicksToAnswer(answerIn);
         //load the results string from the char array
-        
+        stopVal = this.resultsChr.length;
+        for (i = 0; i < stopVal; i++) {
+            this.resultsDispStr = this.resultsDispStr + this.resultsChr[i] + " ";  //will have extra space at end when done
+        }
+
+        //put strings out to display
+        document.querySelector("#Disp-Results").textContent = this.resultsDispStr;
+        document.querySelector("#Disp-PicksGood").textContent = this.lettersGoodStr;
+        document.querySelector("#Disp-PicksBad").textContent = this.lettersBadStr;
+    },
+
+
+    pushLetterPicked: function (chrIn, answerStrIn) {
+        //takes inoming letter and pushes to the picked letters then redraws
+        //need incoming letter and answer string
+        this.lettersPicked.push(chrIn);
+        this.redrawResultsStr(answerStrIn);
     }
 
 };

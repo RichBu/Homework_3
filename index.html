@@ -162,7 +162,21 @@
         <div class="row">
             <div class="panel panel-info guessDispBox">
                 <div class="panel-heading">
-                    <span id="Disp-Results">answer goes_- __H here</span>
+                    <span id="Disp-Results">answer goes here</span>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 5pt">
+            <p></p>
+        </div>
+        <div class="row">
+            <div class="panel panel-info guessDispBox">
+                <div class="panel-body">
+                    <span style="color:forestgreen;"></span>
+                    <span id="Disp-PicksGood" style="color:forestgreen;">good letter</span>
+                    <span>      </span>
+                    <span style="color: red;"></span>
+                    <span id="Disp-PicksBad" style="color: red;">bad letter</span>
                 </div>
             </div>
         </div>
@@ -196,6 +210,15 @@
         //initialize once on startup
         gameGuess.init();
         gameGuess.redrawResultsStr(answer.wordCurrAnswerCapsStr);
+
+        //here is the main loop now for key presses
+        document.onkeyup = function (event) {
+            var keyPressChar = "a";  //just to make sure it is a character
+            // Determines which key was pressed.
+            keyPressChar = event.key;
+            var userGuessChar = keyPressChar.toUpperCase();
+            gameGuess.pushLetterPicked( userGuessChar, answer.wordCurrAnswerCapsStr );
+        };
     </script>
 </body>
 
