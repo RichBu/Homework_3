@@ -64,18 +64,20 @@ var gameGuess = {
     lettersGoodStr: "",
     lettersBadChr: [],
     lettersBadStr: "",
-    state: 0,
+    state: 0,               //-1=init  0=input data  1=rdy to play  2=started play  3=guessing started  4=guess timing  5=guess timed out  10=evaluating  15=display result
     numGuesses: 0,
     numWrong: 0,
     numCorrect: 0,
+    numLeft: 0,
+    numLimit: 10,
     numCharRight: 0,
     timeStart: "",
     timeElapsedDT: "",
     timeElapsedSec: 0,
-    timeAllowed: 0,
-    isGameOverMatch: false;     //game is over because a match
-    isGameOverLost: false;      //game is over because ran out of guesses
-    isGameOverTimeOut: false;  //game is over, timed out
+    timeLimit: 0,
+    isGameOverMatch: false,     //game is over because a match
+    isGameOverLost: false,      //game is over because ran out of guesses
+    isGameOverTimeOut: false,  //game is over, timed out
 
 
     clearDisp: function () {
@@ -111,15 +113,22 @@ var gameGuess = {
         this.numGuesses = 0;
         this.numWrong = 0;
         this.numCorrect = 0;
+        this.numLeft = this.numLimit;
         this.numCharRight = 0;
         this.timeStart = "";
         this.timeElapsedDT = ""
         this.timeElapsedSec = 0;
-        this.timeAllowed: 0;
+        this.timeLimit =  0;
+        this.isGameOverLost = false;
+        this.isGameOverMatch = false;
+        this.isGameOverTimeOut = false;
     },
 
     compPicksToAnswer: function (answerIn) {
         //compare the letters picked to the answer and puts into results
+        this.numWrong = 0;
+        this.numCorrect = 0;
+
         //loop thru every letter picked, then loop thru answer
         var stopVal1 = this.lettersPicked.length;
         var stopVal2 = answerIn.length;
@@ -128,6 +137,7 @@ var gameGuess = {
             for (var j = 0; j < stopVal2; j++) {
                 if (this.lettersPicked[i] === answerIn.charAt(j)) {
                     //there is a match so index of results is same pos as answerIn
+                    this.numCorrect++;
                     this.resultsChr[j] = answerIn.charAt(j);
                     this.lettersGoodChr.push(answerIn.charAt(j));
                     this.lettersGoodStr = this.lettersGoodStr + answerIn.charAt(j);
@@ -137,9 +147,25 @@ var gameGuess = {
             if (noLetterFound === true) {
                 //there was not a match
                 //this.resultsChr.push("_");  //push _ as a default
+                this.numWrong++;
                 this.lettersBadChr.push(answerIn.charAt(j));
-                this.lettersBadStr = this.lettersBadStr + this.lettersPicked[i]; 
+                this.lettersBadStr = this.lettersBadStr + this.lettersPicked[i];
             }
+        }
+
+        this.numLeft = this.numLimit - this.numWrong;
+
+        if (stopVal2 > 0) {
+            //only make decisions if game is won, lost, or expired only if answer str is not a null
+            if (this.numCorrect === answerIn.length && this.numWrong==0 ) {
+                //game over because won
+                this.isGameOverMatch = true;
+            }
+            if ( this.numLeft <= 0  ) {
+                //took too many guesses
+                this.isGameOverLost = true;
+            }
+
         }
     },
 
@@ -148,7 +174,7 @@ var gameGuess = {
         this.clearDisp();
         //from the string coming in, setup the results array and string
         var stopVal = answerIn.length;
-        for (i = 0; i < stopVal; i++) {
+        for (var i = 0; i < stopVal; i++) {
             this.resultsChr.push("_");  //push _ as a default
         }
         this.numCorrect = 0;
@@ -164,17 +190,29 @@ var gameGuess = {
         document.querySelector("#Disp-Results").textContent = this.resultsDispStr;
         document.querySelector("#Disp-PicksGood").textContent = this.lettersGoodStr;
         document.querySelector("#Disp-PicksBad").textContent = this.lettersBadStr;
+
+        //update stats on display
+        document.querySelector("#lblStatNumGuesses").textContent = this.numGuesses;
+        document.querySelector("#lblStatGuessesLeft").textContent = this.numLeft;
+        document.querySelector("#lblStatNumCorrect").textContent = this.numCorrect;
+        document.querySelector("#lblStatNumWrong").textContent = this.numWrong;
+        
     },
 
 
     pushLetterPicked: function (chrIn, answerStrIn) {
         //takes inoming letter and pushes to the picked letters then redraws
         //need incoming letter and answer string
+        this.numGuesses++;
         this.lettersPicked.push(chrIn);
         this.redrawResultsStr(answerStrIn);
     }
 
 };
+
+var statsDisp = {
+
+}
 
 //all the settings for a gamw
 var gameSettings = {
