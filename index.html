@@ -42,8 +42,8 @@
             <span id="closeModHelp" class="close">&times;</span>
             <p>Hangman Game by Rich Budek</p>
             <p>for Northwestern University Full Stack Bootcamp</p>
-            <p>This game is meant to run inside of a browser using Javascript. The windows is responsive (liquid)
-                will change based on the size of the screen, with buttons moving, etc. as the screen width changes.
+            <p>This game is meant to run inside of a browser using Javascript. The windows is responsive (liquid) will change
+                based on the size of the screen, with buttons moving, etc. as the screen width changes.
             </p>
         </div>
     </div>
@@ -59,7 +59,9 @@
     <div id="modPlay" class="modal">
         <div class="modal-content">
             <span id="closeModPlay" class="close">&times;</span>
-            <p>Play the Game</p>
+            <h4>
+                <p>Play the Game</p>
+            </h4>
             <p>There are several things left to do</p>
         </div>
     </div>
@@ -67,8 +69,37 @@
     <div id="modWords" class="modal">
         <div class="modal-content">
             <span id="closeModWords" class="close">&times;</span>
-            <p>Words used by the game</p>
-            <p>This uses words from several "dictionaries"</p>
+            <h4>
+                <p>Words used by game</p>
+            </h4>
+            <p>Words are pulled from several "dictionaries"</p>
+            <p></p>
+            <!-- setup the wrapper as a column  -->
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">  -->
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" title="If you want to cheat, click here" id="btnDispAnswer">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <span>answer</span>
+                        </div>
+                        <div class="panel-body">
+                            <span id="lblMW-Answer" style="display: none;">none</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" title="which dictionary is being used">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <span>dictionary</span>
+                        </div>
+                        <div class="panel-body">
+                            <span id="lblMW-Dict">none</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div>  -->
+
         </div>
     </div>
 
@@ -77,19 +108,23 @@
             <!-- top row, make it two columns for smaller screens -->
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                 <!-- This is coumn of heading -->
-                <p><h1>Hangman Game</h1></p>
+                <p>
+                    <h1>Hangman Game</h1>
+                </p>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-6 col xs-6">
                 <div class="row">
-                    <p><h2> </h2></p>
+                    <p>
+                        <h2> </h2>
+                    </p>
                 </div>
                 <div class="row">
                     <!-- This is the column with buttons -->
-                    <button style="Float: left;" id="btnWords" class="bigButton">WORDS </button>
-                    <button style="Float: left;" id="btnPlay" class="bigButton">PLAY </button>
-                    <button style="Float: left;" id="btnHiScores" class="bigButton">HI SCORES</button>
-                    <button style="Float: left;" id="btnHelp" class="bigButton">HELP</button>
-                    <button style="Float: left;" id="btnSettings" class="bigButton">SETTINGS </button>
+                    <button style="Float: left;" id="btnWords" class="bigButton" data-toggle="tooltip" title="View answer, word lists, and dictionaries">WORDS </button>
+                    <button style="Float: left;" id="btnPlay" class="bigButton" data-toggle="tooltip" title="Play the game">PLAY </button>
+                    <button style="Float: left;" id="btnHiScores" class="bigButton" data-toggle="tooltip" title="high scores">HI SCORES</button>
+                    <button style="Float: left;" id="btnHelp" class="bigButton" data-toggle="tooltip" title="Help and about">HELP</button>
+                    <button style="Float: left;" id="btnSettings" class="bigButton" data-toggle="tooltip" title="Settings for game">SETTINGS </button>
                 </div>
             </div>
         </div>
@@ -102,7 +137,7 @@
                 <!-- after the about me header, there is a row with 2 columns -->
                 <div class="row">
                     <!-- wrap the left side with "article" tag for SEO engines -->
-                    <artcile>
+                    <div>
                         <!-- article is two colunns -->
                         <div class="col-lg-3 col-md-12 col-sm-3 col-xm-12">
                             <img src="http://placehold.it/150x150" alt="Placeholder" class="img-thumbnail img-responsive">
@@ -111,8 +146,7 @@
                             <p> PUT
                             </p>
                         </div>
-                    </artcile>
-
+                    </div>
                 </div>
             </div>
 
@@ -120,6 +154,16 @@
                 <aside>
                     <P>this is the side</P>
                 </aside>
+            </div>
+        </div>
+        <div class="row" style="height: 20pt">
+            <p></p>
+        </div>
+        <div class="row">
+            <div class="panel panel-info guessDispBox">
+                <div class="panel-heading">
+                    <span id="Disp-Results">answer goes_- __H here</span>
+                </div>
             </div>
         </div>
 
@@ -138,10 +182,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- load my custom js for this project -->
+    <script src="assets/script_globals.js"></script>
     <script src="assets/script.js"></script>
     <script src="assets/script_modals.js"></script>
     <script src="assets/script_words.js"></script>
     <script src="assets/script_play.js"></script>
+    <script>
+        //activate BootStrap tool tips
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        //initialize once on startup
+        gameGuess.init();
+        gameGuess.redrawResultsStr(answer.wordCurrAnswerCapsStr);
+    </script>
 </body>
 
 </html>

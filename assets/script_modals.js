@@ -34,10 +34,22 @@ var btnPlay = document.getElementById("btnPlay");
 btnPlay.onclick = function () {
     modalPlay.style.display = "block";
 }
+
 var btnWords = document.getElementById("btnWords");
 btnWords.onclick = function () {
     modalWords.style.display = "block";
+    document.querySelector("#lblMW-Answer").textContent = answer.wordCurrAnswerCapsStr;
+    document.querySelector("#lblMW-Dict").textContent = wordListDictNmes[wordListDictToUse];
+    var dispAnswer = document.getElementById( "lblMW-Answer" );
+      dispAnswer.style.display = "none";
 }
+
+var btnDispAnswer2 = document.getElementById("btnDispAnswer");
+btnDispAnswer2.onclick = function () {
+    var dispAnswer = document.getElementById( "lblMW-Answer" );
+      dispAnswer.style.display = "block";
+}
+
 
 // Get the <span> element that closes the modal
 //var closeModHelp = document.getElementsByClassName("close")[0];

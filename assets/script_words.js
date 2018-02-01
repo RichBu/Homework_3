@@ -4,12 +4,6 @@
 
 /* routines to handle all the scripts associated with the words modal  */
 
-const constWordLenMax = 20;
-
-var wordListCurr = [];
-var wordListStatus = [];        //0=normal unused   1=being used in game   -1=used already
-var wordListDictNmes = ["General", "Computer", "Technical", "Religious"];
-var wordListDict = [];
 for (var i = 0; i < 4; i++) {
     wordListDict[i] = [];
 }
@@ -17,36 +11,6 @@ wordListDict[0] = ["House", "ladder", "Boat", "Turtle", "Train", "Lake"];
 wordListDict[1] = ["Computer", "Tablet", "Memory", "Battery", "HTML", "Javascript", "Android"];  //computer
 wordListDict[2] = ["Atom", "Thermal Dynamics", "Carbon", "Conduction"];   //technical
 wordListDict[3] = ["Jesus", "Moses", "Noah", "Adam", "Pharoah", "Exodus", "Genesis", "Romans"]; //religious
-var wordListDictToUse = 0;  //dictionary to use
-var wordDictWordNumInUse = 0; //word number from the dictionary in use
-var wordListUsed = [];
-var wordCurrAnswerStr = "";  //current answer in string form
-var wordCurrAnswerChar = [];
-
-var isWordListRandomPick = false;  //will we be using random picks from list ?
-var isWordListClearAcive = false;  //are we clearing the word list now ?
-
-
-// structure to hold the answer along with methods
-var Answer =  {
-    wordCurrAnswerStr : "",
-    wordCurrAnswerChar : [],
-
-    clear: function () {
-        this.wordCurrAnswerStr = "";
-        var stopVal = this.wordCurrAnswerChar.length;
-        for ( var i=0; i<stopVal; i++ ) {
-            this.wordCurrAnswerChar.pop();
-        }
-    },
-
-    loadFromDict: function ( dictArrayIn, iDictNum, iWordNum ) {
-        this.clear();
-        this.wordCurrAnswerStr = dictArrayIn[iDictNum][iWordNum];
-        var stopVal = this.wordCurrAnswerStr.length;
-    }
-};
-
 
 function wordListClearClicked() {
     //clear out the wordListCurr
@@ -92,6 +56,10 @@ function wordListReloadClicked() {
     wordListUsedClear();
 }
 
+function btnDispAnswer() {
+    //user clicked and wants to see the answer
+    
+}
 
 // clear out the initial list
 wordListClearClicked();
@@ -102,7 +70,7 @@ wordListUsedClear();  //clear out the wordList Used  array
 
 
 // *RPB test purposes only
-Answer.clear();
-Answer.loadFromDict( wordListDict, wordListDictToUse, wordDictWordNumInUse );
+answer.clear();
+answer.loadFromDict( wordListDict, wordListDictToUse, wordDictWordNumInUse );
 
 

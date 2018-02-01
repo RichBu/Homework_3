@@ -21,9 +21,21 @@
     */
 }
 
+.min-pad-info {
+    /* min padding on the sides */
+    padding: 3px 5px 3px 5px;
+}
+
 .footer {
     text-align: center;
     color: #36A194;
+}
+
+.guessDispBox {
+    width: 85%;
+    font-family: Courier New, Courier, monospace;
+    font-size: 16pt;
+    font-weight: bold;
 }
 
 .boxMessageInput {
