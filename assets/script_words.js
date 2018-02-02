@@ -7,7 +7,7 @@
 for (var i = 0; i < 4; i++) {
     wordListDict[i] = [];
 }
-wordListDict[0] = ["House", "ladder", "Boat", "Turtle", "Train", "Lake"];
+wordListDict[0] = ["House", "Desk", "Boat", "Carpet", "Train", "Lake"];
 wordListDict[1] = ["Computer", "Tablet", "Memory", "Battery", "HTML", "Javascript", "Android"];  //computer
 wordListDict[2] = ["Atom", "Thermal Dynamics", "Carbon", "Conduction"];   //technical
 wordListDict[3] = ["Jesus", "Moses", "Noah", "Adam", "Pharoah", "Exodus", "Genesis", "Romans"]; //religious

@@ -11,11 +11,11 @@ document.getElementById("navBarCommon").innerHTML =
 '</div>' + 
 '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">' +
 '    <ul class="nav navbar-nav navbar-right">' +
-'        <li><a href="words.html">Words</a></li>' +
-'        <li><a href="play.html">Play</a></li>' +
-'        <li><a href="contact.html">Hi-Score</a></li>' +
-'        <li><a href="contact.html">Help</a></li>' +
-'        <li><a href="contact.html">Settings</a></li>' +
+//'        <li><a href="words.html">Words</a></li>' +
+//'        <li><a href="play.html">Play</a></li>' +
+//'        <li><a href="contact.html">Hi-Score</a></li>' +
+//'        <li><a href="contact.html">Help</a></li>' +
+'        <li><a href="#">Portfolio</a></li>' +
 '    </ul>' + 
 '</div>' + 
 '</div>';

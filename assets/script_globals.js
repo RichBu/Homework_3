@@ -217,7 +217,6 @@ var gameGuess = {
         //check to see if user typed in the character already
         var posKeyInStr = this.lettersPickedStr.indexOf( chrWorking );
 
-        console.log( posKeyInStr + " " + this.lettersPickedStr );
         if ((posKeyInStr >= 0) && (this.lettersPickedStr.length > 0)) {
             alert("You already pressed that letter ! ");
         } else {
