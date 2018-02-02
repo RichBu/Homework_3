@@ -20,8 +20,6 @@ var wordListStatus = [];        //0=normal unused   1=being used in game   -1=us
 var wordListDictNmes = ["General", "Computer", "Technical", "Religious"];
 var wordListDict = [];
 
-var wordListDictToUse = 0;  //dictionary to use
-var wordDictWordNumInUse = 0; //word number from the dictionary in use
 var wordListUsed = [];
 var wordCurrAnswerStr = "";  //current answer in string form
 var wordCurrAnswerChar = [];
@@ -60,6 +58,7 @@ var gameGuess = {
     resultsChr: [], //char array
     resultsDispStr: "",  //result display string
     lettersPicked: [],
+    lettersPickedStr: "",  //string value of letter picked
     lettersGoodChr: [],
     lettersGoodStr: "",
     lettersBadChr: [],
@@ -69,7 +68,7 @@ var gameGuess = {
     numWrong: 0,
     numCorrect: 0,
     numLeft: 0,
-    numLimit: 10,
+    numLimit: 7,
     numCharRight: 0,
     timeStart: "",
     timeElapsedDT: "",
@@ -78,6 +77,7 @@ var gameGuess = {
     isGameOverMatch: false,     //game is over because a match
     isGameOverLost: false,      //game is over because ran out of guesses
     isGameOverTimeOut: false,  //game is over, timed out
+    isCharInDuplicate: false,
 
 
     clearDisp: function () {
@@ -109,6 +109,7 @@ var gameGuess = {
         for (var i = 0; i < stopVal; i++) {
             this.lettersPicked.pop();
         }
+        this.lettersPickedStr = "";
         this.state = -1;
         this.numGuesses = 0;
         this.numWrong = 0;
@@ -118,10 +119,11 @@ var gameGuess = {
         this.timeStart = "";
         this.timeElapsedDT = ""
         this.timeElapsedSec = 0;
-        this.timeLimit =  0;
+        this.timeLimit = 0;
         this.isGameOverLost = false;
         this.isGameOverMatch = false;
         this.isGameOverTimeOut = false;
+        this.isCharInDuplicate = false;
     },
 
     compPicksToAnswer: function (answerIn) {
@@ -129,6 +131,10 @@ var gameGuess = {
         this.numWrong = 0;
         this.numCorrect = 0;
 
+
+
+
+        //alert ( "Search for letters " + posGoodStr + " " + posBadStr );
         //loop thru every letter picked, then loop thru answer
         var stopVal1 = this.lettersPicked.length;
         var stopVal2 = answerIn.length;
@@ -151,22 +157,24 @@ var gameGuess = {
                 this.lettersBadChr.push(answerIn.charAt(j));
                 this.lettersBadStr = this.lettersBadStr + this.lettersPicked[i];
             }
-        }
+        };
 
         this.numLeft = this.numLimit - this.numWrong;
 
         if (stopVal2 > 0) {
             //only make decisions if game is won, lost, or expired only if answer str is not a null
-            if (this.numCorrect === answerIn.length && this.numWrong==0 ) {
+            if (this.numCorrect === answerIn.length) {
                 //game over because won
                 this.isGameOverMatch = true;
             }
-            if ( this.numLeft <= 0  ) {
+            if (this.numLeft <= 0) {
                 //took too many guesses
                 this.isGameOverLost = true;
             }
 
-        }
+        };
+
+
     },
 
     redrawResultsStr: function (answerIn) {
@@ -196,23 +204,114 @@ var gameGuess = {
         document.querySelector("#lblStatGuessesLeft").textContent = this.numLeft;
         document.querySelector("#lblStatNumCorrect").textContent = this.numCorrect;
         document.querySelector("#lblStatNumWrong").textContent = this.numWrong;
-        
+
     },
 
 
     pushLetterPicked: function (chrIn, answerStrIn) {
         //takes inoming letter and pushes to the picked letters then redraws
         //need incoming letter and answer string
-        this.numGuesses++;
-        this.lettersPicked.push(chrIn);
-        this.redrawResultsStr(answerStrIn);
+        //should already be upper case, but just to make sure
+        var chrWorking = chrIn.toUpperCase();
+
+        //check to see if user typed in the character already
+        var posKeyInStr = this.lettersPickedStr.indexOf( chrWorking );
+
+        console.log( posKeyInStr + " " + this.lettersPickedStr );
+        if ((posKeyInStr >= 0) && (this.lettersPickedStr.length > 0)) {
+            alert("You already pressed that letter ! ");
+        } else {
+            this.numGuesses++;
+            this.lettersPicked.push(chrWorking);
+            this.lettersPickedStr = this.lettersPickedStr + chrWorking;
+            this.redrawResultsStr(answerStrIn);
+        };
     }
 
 };
 
+
+
+var wordListObj = {
+    numDictToUse: 0,  //dictionary to use
+    numWordToUse: 0,  //word to use
+
+    loadWordFromDict: function (wordListDictIn) {
+        answer.loadFromDict(wordListDictIn, this.numDictToUse, this.numWordToUse);
+    },
+
+    pickNextWordFromDict: function (wordListDictIn) {
+        //takes the next word on list if there is one otherwise returns a false
+        var outVal = 0;  //=0 means good any other value is bad
+        if ((this.numWordToUse + 1) < wordListDictIn.length) {
+            //can increment
+            this.numWordToUse++;
+            answer.loadFromDict(wordListDictIn, this.numDictToUse, this.numWordToUse);
+        } else {
+            outVal = -1;
+        }
+    },
+
+    initValues: function () {
+        //resets the initial values
+        this.numDictToUse = 0;
+        this.numWordToUse = 0;
+        wordListLoadFromDict(this.numDictToUse);
+        wordListUsedClear();
+    }
+};
+
+
+var playObj = {
+    //play object 
+    //items associated with game play
+
+    playState: 0,  //wat state is the game in
+    imgLoc: "assets/",
+    imgNames: [
+        "ManFree_01.png",   //"he's free"
+        "Man_05.png",   //head = 1 wrong
+        "Man_06.png",   //body
+        "Man_07.png",   //left foot
+        "Man_08.png",   //right foot
+        "Man_09.png",   //left arm
+        "Man_10.png",   //right arm
+        "Man_lost.png",   //dead        
+        "Init_pic.png",  //on loading
+        "Ready_pic.png",        //1 = ready
+        "Start_02.png",  //press any letter  when bad && good both = 0
+    ],  //array of image names
+    displayCorrectPic: function (gameGuessObjIn) {
+        //put the correct picture onto the display
+        var imgName = "";  //name of the pict file to pull up
+        imgName = this.imgLoc + this.imgNames[4];
+        if (gameGuessObjIn.numGuesses == 0 && gameGuessObjIn.numCorrect == 0 && gameGuessObjIn.numWrong == 0) {
+            imgName = this.imgLoc + this.imgNames[10];
+        } else {
+            if (gameGuessObjIn.numWrong == 0) {
+                //special case, the # guess wrong is still zero, but picked a char already
+                imgName = this.imgLoc + this.imgNames[0];
+            } else {
+                //so game has started, need offset to picture
+                var imgOffsetNum = 0;
+                var imgNumToPull = imgOffsetNum + gameGuessObjIn.numWrong;
+                imgName = this.imgLoc + this.imgNames[imgNumToPull];
+            }
+        }
+        var imgElem = document.getElementById('manPic');
+        imgElem.src = imgName;
+    },
+
+    init: function () {
+        //reset the variables for play
+        this.playState = 0;
+    }
+};
+
+
 var statsDisp = {
 
-}
+};
 
 //all the settings for a gamw
 var gameSettings = {

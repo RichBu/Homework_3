@@ -41,7 +41,7 @@ var btnWords = document.getElementById("btnWords");
 btnWords.onclick = function () {
     modalWords.style.display = "block";
     document.querySelector("#lblMW-Answer").textContent = answer.wordCurrAnswerCapsStr;
-    document.querySelector("#lblMW-Dict").textContent = wordListDictNmes[wordListDictToUse];
+    document.querySelector("#lblMW-Dict").textContent = wordListDictNmes[wordListObj.numDictToUse];
     var dispAnswer = document.getElementById( "lblMW-Answer" );
       dispAnswer.style.display = "none";
 }

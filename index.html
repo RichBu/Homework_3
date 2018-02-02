@@ -36,14 +36,17 @@
             <h2>
                 <p>You Won !!!</p>
             </h2>
+            <p> </p>
+            <p>To play again, press the PLAY button and then pick PLAY AGAIN</p>
         </div>
     </div>
     <div id="modOverLost" class="modal">
             <div class="modal-content">
                 <span id="closeModOverLost" class="close">&times;</span>
                 <h2>
-                    <p>Sorry you lost</p>
-                </h2>
+                    <p>Sorry you lost</p></h2>
+                    <p> </p>
+                    <p>To play again, press the PLAY button and then pick PLAY AGAIN</p>
             </div>
         </div>
     
@@ -170,7 +173,7 @@
                     <!-- wrap the left side with "article" tag for SEO engines -->
                     <div>
                         <!-- article is two colunns -->
-                        <img src="http://placehold.it/150x150" alt="Placeholder" class="img-thumbnail img-responsive">
+                        <img id="manPic" src="http://placehold.it/150x150" alt="Placeholder" class="img-thumbnail img-responsive">
                     </div>
                 </div>
             </div>
@@ -272,6 +275,7 @@
         //initialize once on startup
         gameGuess.init();
         gameGuess.redrawResultsStr(answer.wordCurrAnswerCapsStr);
+        playObj.displayCorrectPic( gameGuess );
 
         //here is the main loop now for key presses
         document.onkeyup = function (event) {
@@ -280,6 +284,7 @@
             keyPressChar = event.key;
             var userGuessChar = keyPressChar.toUpperCase();
             gameGuess.pushLetterPicked(userGuessChar, answer.wordCurrAnswerCapsStr);
+            playObj.displayCorrectPic( gameGuess );
             if (gameGuess.isGameOverMatch === true) {
                 modalOverWon.style.display = "block";
             }

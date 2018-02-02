@@ -58,19 +58,20 @@ function wordListReloadClicked() {
 
 function btnDispAnswer() {
     //user clicked and wants to see the answer
-    
+
 }
 
 // clear out the initial list
+answer.clear();
 wordListClearClicked();
-wordListDictToUse = 0;  //which of the dictionaries to load data from
-wordDictWordNumInUse = 0;
-wordListLoadFromDict( wordListDictToUse );
-wordListUsedClear();  //clear out the wordList Used  array
+wordListObj.initValues();
+//wordListLoadFromDict( wordListObj.numDictToUse );
+//wordListUsedClear();  //clear out the wordList Used  array
 
 
 // *RPB test purposes only
-answer.clear();
-answer.loadFromDict( wordListDict, wordListDictToUse, wordDictWordNumInUse );
+wordListObj.loadWordFromDict( wordListDict );
+wordListObj.pickNextWordFromDict( wordListDict );
+//answer.loadFromDict( wordListDict, wordListObj.numDictToUse, wordListObj.numWordToUse );
 
 
