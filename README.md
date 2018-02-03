@@ -3,11 +3,28 @@ Homework 3  hangman game
 
 by Rich Budek 02/02/2018
 
+Project location for viewing   [richbu.github.io](http://richbu.github.io/Homework_2/)
+
 Description:
 This is a hangman game with graphics and word dictionaries.  Words are pulled from multiple dictionaries based on subject matter.  Currently, the dictionaries are limits and no way to add words. It uses graphics to make the game more realistic. Title and border made with same border and style as on-line professional.
 
 Startup Screen:
+The top row returns the user back to the portfolio
 ![Start up Screen](/screen_caps/Hangman_01.png)
+
+When the user starts taking guesses then the hangman builds on the screen. Correct letter guesses appear in green  and bad guesses are in red.
+
+![Typical game](/screen_caps/Hangman_02.png)
+
+
+If too many guess are taken, the man is hung and a modal window comes to the front announcing what happened:
+
+![Out of guesses](/screen_caps/Hangman_03.png)
+
+
+The modal window can be cleared using either the close button or by hitting a blank area on the screen:
+
+!["hung" man](/screen_caps/Hangman_04.png)
 
 
 Technolgies used:
