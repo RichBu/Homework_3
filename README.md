@@ -7,7 +7,7 @@ Description:
 This is a hangman game with graphics and word dictionaries.  Words are pulled from multiple dictionaries based on subject matter.  Currently, the dictionaries are limits and no way to add words. It uses graphics to make the game more realistic. Title and border made with same border and style as on-line professional.
 
 Startup Screen:
-![Start up Screen][screen_caps/Hangman_01.png]
+![Start up Screen](/screen_caps/Hangman_01.png)
 
 
 Technolgies used:
