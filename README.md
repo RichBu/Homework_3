@@ -3,8 +3,12 @@ Homework 3  hangman game
 
 by Rich Budek 02/02/2018
 
-Summary:
-This is the more advanced assignment.  It uses graphics to make the game more realistic.
+Description:
+This is a hangman game with graphics and word dictionaries.  Words are pulled from multiple dictionaries based on subject matter.  Currently, the dictionaries are limits and no way to add words. It uses graphics to make the game more realistic. Title and border made with same border and style as on-line professional.
+
+Startup Screen:
+
+
 
 Technolgies used:
 1. HTML for general page layout.  Handcoded to match porfolio pages
